@@ -59,3 +59,34 @@ Bessie 想要使得她得到的浆果数量最大。但是，Farmer John 希望 
 
 
 
+By AP G2-1 文奉璋 (超级快)
+```
+#include<bits/stdc++.h>
+using namespace std;
+int b[2000],ans,l,r,mid,t,n,k;
+bool cmp (int a,int b) {
+	return a>b;
+}
+int main(){
+	ios::sync_with_stdio(0);cin.tie(0),cout.tie(0);
+	cin>>n>>k;
+	for (int i=1;i<=n;i++)cin>>b[i];
+	sort(b+1,b+1+n,cmp);
+	for (int x=1;;x++){
+		priority_queue<int> q;
+		int cnt=0;
+		for (int j=1;j<=n;j++) {
+			cnt+=b[j]/x;
+			q.push(b[j]%x);
+		}
+		if (cnt<k/2) break;
+		if (cnt>k) continue;
+		t = (cnt-k/2)*x;
+		for (int j=cnt+1;j<=k;j++)
+			t+=q.top(),q.pop();
+		ans=max(t,ans);
+	}
+	cout<<ans;
+	return 0;
+}
+```
